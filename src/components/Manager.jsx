@@ -57,9 +57,24 @@ const Manager = () => {
 
     const editPassword = (id) => {
         console.log("editing password with id:", id);
-        // setPasswordArray([...passwordArray, {...form, id: uuidv4()}])
-        // localStorage.setItem("password", JSON.stringify([...passwordArray, form]))
-        // console.log([...passwordArray, form])
+        const passwordToEdit = passwordArray.find(item => item.id === id);
+        if (passwordToEdit) {
+            setform({ site: passwordToEdit.site, username: passwordToEdit.username, password: passwordToEdit.password });
+        }
+        const updatedPasswords = passwordArray.filter(item => item.id !== id);
+        setPasswordArray(updatedPasswords);
+        localStorage.setItem("passwords", JSON.stringify(updatedPasswords));
+        toast.success('Password Edited Successfully!', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+        });
     }
 
     const handleChange = (e) => {
