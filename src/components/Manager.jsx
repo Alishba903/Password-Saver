@@ -43,27 +43,30 @@ const Manager = () => {
     }
 
     const savePassword = () => {
-        setPasswordArray([...passwordArray, {...form, id: uuidv4()}])
-        localStorage.setItem("password", JSON.stringify([...passwordArray, {...form, id: uuidv4()}]))
-        console.log([...passwordArray, form])
-        setform({ site: "", username: "", password: "" })
-        toast('Password Saved!', {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: false,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-            transition: Bounce,
-        });
+        if(form.site.length > 3 && form.username.length > 3 && form.password.length > 3){
+            setPasswordArray([...passwordArray, {...form, id: uuidv4()}])
+            localStorage.setItem("password", JSON.stringify([...passwordArray, {...form, id: uuidv4()}]))
+            console.log([...passwordArray, form])
+            setform({ site: "", username: "", password: "" })
+            toast('Password Saved!', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                transition: Bounce,
+            });
+        } else {
+            toast('Password, Username and Site must be at least 4 characters long!',);
+        }
     }
 
     const deletePassword = (id) => {
         console.log("Deleting password with id:", id);
         let confirm = window.confirm("Are you sure you wnat to delete this password?");
-        if (!confirm) return;
         if(confirm){
             setPasswordArray(passwordArray.filter(item=>item.id!== id))
             localStorage.setItem("passwords", JSON.stringify(passwordArray.filter(item=>item.id!== id)))
@@ -114,19 +117,19 @@ const Manager = () => {
             />
             <div className="absolute inset-0 -z-10 h-full w-full bg-green-50 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]"><div className="absolute left-0 right-0 top-0 -z-10 m-auto h-[310px] w-[310px] rounded-full bg-green-400 opacity-20 blur-[100px]"></div></div>
 
-            <div className="mycontainer">
+            <div className="p-2 pt-3 md:mycontainer min-h-screen">
                 <h1 className="text-4xl font-bold py-2 border border-white text-center"> <span className="py-2 border border-white text-green-500">&lt;</span>
                     Pass<span className="py-2 border border-white text-green-500">OP/&gt;</span>
                 </h1>
                 <p className="text-green-900 py-2 border border-white text-lg text-center">Your own Password Manager</p>
 
                 <div className="py-2 border border-white text-black flex flex-col p-4 gap-8 items-center">
-                    <input value={form.site} onChange={handleChange} placeholder="Enter website URL" className='rounded-full border border-green-500 w-full p-4 py-1' type="text" name="site" id="" />
-                    <div className="flex w-full gap-8">
-                        <input value={form.username} onChange={handleChange} placeholder="Enter Username" className='rounded-full border border-green-500 w-full p-4 py-1' type="text" name="username" id="" />
+                    <input value={form.site} onChange={handleChange} placeholder="Enter website URL" className='rounded-full border border-green-500 w-full p-4 py-1' type="text" name="site" id="site" />
+                    <div className="flex flex-col gap-4 w-full md:w-[400px]">
+                        <input value={form.username} onChange={handleChange} placeholder="Enter Username" className='rounded-full border border-green-500 w-full p-4 py-1' type="text" name="username" id="username" />
                         <div className="relative">
 
-                            <input ref={passwordRef} value={form.password} onChange={handleChange} placeholder="Enter Password" className='rounded-full border border-green-500 w-full p-4 py-1' type="password" name="password" id="" />
+                            <input ref={passwordRef} value={form.password} onChange={handleChange} placeholder="Enter Password" className='rounded-full border border-green-500 w-full p-4 py-1' type="password" name="password" id="password" />
                             <span className='absolute right-[3px] top-[6px] cursor-pointer' onClick={showPassword}>
                                 <img ref={ref} className="px-2" width={35} src="icons/eye.png" alt="" />
                             </span>
@@ -144,7 +147,7 @@ const Manager = () => {
                 <div className="passwords">
                     <h2 className="font-bold text-2xl py-4">Your Passwords</h2>
                     {passwordArray.length === 0 && <div>No Passwords to Show</div>}
-                    {passwordArray.length != 0 && <table className="table-auto w-full rounded-md overflow-hidden">
+                    {passwordArray.length != 0 && <table className="table-auto w-full rounded-md overflow-hidden mb-10">
                         <thead className="bg-green-800 py-2 border border-white text-white">
                             <tr>
                                 <th className="py-2">Site</th>
