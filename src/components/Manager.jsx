@@ -25,7 +25,7 @@ const Manager = () => {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "light",
+            theme: "dark",
             transition: Bounce,
         });
         navigator.clipboard.writeText(text);
@@ -46,25 +46,28 @@ const Manager = () => {
         setPasswordArray([...passwordArray, {...form, id: uuidv4()}])
         localStorage.setItem("password", JSON.stringify([...passwordArray, {...form, id: uuidv4()}]))
         console.log([...passwordArray, form])
+        setform({ site: "", username: "", password: "" })
+        toast('Password Saved!', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            transition: Bounce,
+        });
     }
 
     const deletePassword = (id) => {
         console.log("Deleting password with id:", id);
-        // setPasswordArray([...passwordArray, {...form, id: uuidv4()}])
-        // localStorage.setItem("password", JSON.stringify([...passwordArray, form]))
-        // console.log([...passwordArray, form])
-    }
-
-    const editPassword = (id) => {
-        console.log("editing password with id:", id);
-        const passwordToEdit = passwordArray.find(item => item.id === id);
-        if (passwordToEdit) {
-            setform({ site: passwordToEdit.site, username: passwordToEdit.username, password: passwordToEdit.password });
-        }
-        const updatedPasswords = passwordArray.filter(item => item.id !== id);
-        setPasswordArray(updatedPasswords);
-        localStorage.setItem("passwords", JSON.stringify(updatedPasswords));
-        toast.success('Password Edited Successfully!', {
+        let confirm = window.confirm("Are you sure you wnat to delete this password?");
+        if (!confirm) return;
+        if(confirm){
+            setPasswordArray(passwordArray.filter(item=>item.id!== id))
+            localStorage.setItem("passwords", JSON.stringify(passwordArray.filter(item=>item.id!== id)))
+            toast('Password Deleted!', {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -75,6 +78,17 @@ const Manager = () => {
             theme: "light",
             transition: Bounce,
         });
+        }
+    }
+
+    const editPassword = (id) => {
+        console.log("editing password with id:", id);
+        const confirm = window.confirm("Are you sure you want to edit this password?");
+        if (!confirm) return;
+        if(confirm){
+            setform(passwordArray.filter(item => item.id === id)[0])
+            setPasswordArray(passwordArray.filter(item => item.id !== id))
+        }
     }
 
     const handleChange = (e) => {
