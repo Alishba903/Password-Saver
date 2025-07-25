@@ -6,16 +6,9 @@ const Navbar = () => {
         <div className="flex justify-between items-center mycontainer">
         <div className="logo font-bold text-white text-2xl">
           <span className="text-green-500">&lt;</span>
-          Pass<span className="text-green-500">OP/&gt;</span>
+          Aegis<span className="text-green-500">Pass/&gt;</span>
          
           </div>
-        {/* <ul>
-            <li className="flex gap-4">
-                <a className='hover:font-bold' href="#">Home</a>
-                <a className='hover:font-bold' href="#">About</a>
-                <a className='hover:font-bold' href="#">Contact</a> 
-            </li>
-        </ul> */}
         <button className='text-white bg-green-700 my-5 rounded-full flex justify-center items-center ring-white ring-1 hover:bg-green-600 transition-all duration-300 md:px-4 px-2 py-1'>
             <img className='invert w-10 p-1' src="icons/github.svg" alt="" />
             <span className="font-bold px-2">GitHub</span>
