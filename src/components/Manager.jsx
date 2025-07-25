@@ -115,11 +115,11 @@ const Manager = () => {
                 theme="light"
                 transition={Bounce}
             />
-            <div className="absolute inset-0 -z-10 h-full w-full bg-green-50 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]"><div className="absolute left-0 right-0 top-0 -z-10 m-auto h-[310px] w-[310px] rounded-full bg-green-400 opacity-20 blur-[100px]"></div></div>
+            <div className="absolute inset-0 -z-10 h-full w-full bg-purple-50 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]"><div className="absolute left-0 right-0 top-0 -z-10 m-auto h-[310px] w-[310px] rounded-full bg-purple-400 opacity-20 blur-[100px]"></div></div>
 
             <div className="p-2 pt-3 md:mycontainer min-h-screen">
                 <h1 className="text-4xl font-bold py-2 border border-white text-center"> <span className="py-2 border border-white text-green-500">&lt;</span>
-                    Pass<span className="py-2 border border-white text-green-500">OP/&gt;</span>
+                    Aegis<span className="py-2 border border-white text-green-500">Pass/&gt;</span>
                 </h1>
                 <p className="text-green-900 py-2 border border-white text-lg text-center">Your own Password Manager</p>
 
