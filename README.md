@@ -61,9 +61,4 @@
 - `public/icons/` — App icons
 - `App.jsx` — Main app component
 
-## License
 
-This project is licensed under the MIT License.
-
----
-Created with ❤️ by gypsy.
